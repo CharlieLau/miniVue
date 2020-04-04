@@ -25,13 +25,18 @@ let vm = new Vue({
             },
             immediate: true
         }
+    },
+    computed: {
+        fullName() {
+            return this.name.first + this.name.last
+        }
     }
 
 }).$mount('#app')
 
 
-vm.age = 20;
-vm.name.first = "Jerry"
+// vm.age = 20;
+// vm.name.first = "Jerry"
 
 // vm.name.last = "hello"
 
@@ -51,8 +56,17 @@ vm.name.first = "Jerry"
 //     vm.interests.push({c:5},[3])
 // },1000)
 
-setTimeout(() => {
-    vm.interests.push({
-        c: 5
-    }, [3])
-}, 1000)
+// setTimeout(() => {
+//     vm.interests.push({
+//         c: 5
+//     }, [3])
+// }, 1000)
+
+
+setTimeout(()=>{
+    vm.name.first = "Jerry"
+},1000)
+
+setTimeout(()=>{
+    vm.name.first = "Jerry1"
+},2000)
