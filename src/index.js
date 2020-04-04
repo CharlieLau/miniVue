@@ -11,15 +11,27 @@ let vm = new Vue({
             age: 18,
             interests: ['playing', 'reading', {
                 a: 'c'
-            }]
+            }],
+            school: "lan shan "
+        }
+    },
+    watch: {
+        age(newVal, oldVal) {
+            console.log(newVal, oldVal)
+        },
+        "name.first": {
+            handler() {
+                console.log('updated')
+            },
+            immediate: true
         }
     }
 
 }).$mount('#app')
 
 
-// vm.age = 20;
-// vm.name.first = "Jerry"
+vm.age = 20;
+vm.name.first = "Jerry"
 
 // vm.name.last = "hello"
 
