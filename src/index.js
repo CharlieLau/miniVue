@@ -3,18 +3,75 @@
 
 import {
     h,
-    render
+    render,
+    patch
 } from 'vue/vdom'
 
 
 const oldNode =
-    h('div', {
-        id: "container"
-    }, h('span', {
-        style: {
-            color:"red"
-        }
-    }, 'hello'), 'world')
+    h('ul', {
+            id: "container"
+        },
+        h('li', {
+            style: {
+                background: 'yellow'
+            },
+            key: 'a'
+        }, 'a'),
+        h('li', {
+            style: {
+                background: 'red'
+            },
+            key: 'b'
+        }, 'b'),
+        h('li', {
+            style: {
+                background: 'pink'
+            },
+            key: 'c'
+        }, 'c'),
+        h('li', {
+            style: {
+                background: 'green'
+            },
+            key: 'd'
+        }, 'd'))
 
 
-render(oldNode,document.querySelector('#app'))
+render(oldNode, document.querySelector('#app'))
+
+
+const newNode =
+    h('ul', {
+            id: "aa"
+        },
+        h('li', {
+            style: {
+                background: 'green'
+            },
+            key: 'd'
+        }, 'd'),
+        h('li', {
+            style: {
+                background: 'pink'
+            },
+            key: 'c'
+        }, 'c'),
+        h('li', {
+            style: {
+                background: 'red'
+            },
+            key: 'b'
+        }, 'b'),
+        h('li', {
+            style: {
+                background: 'yellow'
+            },
+            key: 'a'
+        }, 'a')
+    )
+
+
+setTimeout(() => {
+    patch(newNode, oldNode)
+}, 2000)
