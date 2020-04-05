@@ -1,77 +1,30 @@
-//<div id="container"><span style="color:red">welcome</span> world</div>
+import Vue from 'vue'
 
 
-import {
-    h,
-    render,
-    patch
-} from 'vue/vdom'
-
-
-const oldNode =
-    h('ul', {
+const vm = new Vue({
+    data() {
+        return {
+            name:"Jerry",
+            msg: 'hello world'
+        }
+    },
+    render(h) {
+        return h('div', {
             id: "container"
-        },
-        h('li', {
-            style: {
-                background: 'yellow'
-            },
-            key: 'a'
-        }, 'a'),
-        h('li', {
-            style: {
-                background: 'red'
-            },
-            key: 'b'
-        }, 'b'),
-        h('li', {
-            style: {
-                background: 'pink'
-            },
-            key: 'c'
-        }, 'c'),
-        h('li', {
-            style: {
-                background: 'green'
-            },
-            key: 'd'
-        }, 'd'))
+        }, h('span', {
+            style:{
+                color: 'red',
+                paddingRight:'10px'
+            }
+        }, this.name,),this.msg)
+    }
+}).$mount("#app")
 
 
-render(oldNode, document.querySelector('#app'))
 
 
-const newNode =
-    h('ul', {
-            id: "aa"
-        },
-        h('li', {
-            style: {
-                background: 'green'
-            },
-            key: 'd'
-        }, 'd'),
-        h('li', {
-            style: {
-                background: 'pink'
-            },
-            key: 'c'
-        }, 'c'),
-        h('li', {
-            style: {
-                background: 'red'
-            },
-            key: 'b'
-        }, 'b'),
-        h('li', {
-            style: {
-                background: 'yellow'
-            },
-            key: 'a'
-        }, 'a')
-    )
+setTimeout(()=>{
+    vm.name='Charlie'
+},1000)
 
 
-setTimeout(() => {
-    patch(newNode, oldNode)
-}, 2000)
